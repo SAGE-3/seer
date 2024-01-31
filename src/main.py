@@ -1,16 +1,21 @@
-import json
-from flask import Flask
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
-app = Flask(__name__)
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,  # Allows cookies/authorization headers
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.route("/nl2code")
 def nl2code():
     data = json.dumps({"code": "print(\"hello world\")"})
     return data
  
-# main driver function
-if __name__ == '__main__':
- 
-    # run() method of Flask class runs the application 
-    # on the local development server.
-    app.run(port=8001)
+if __name__ == "__main__":
+
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
