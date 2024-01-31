@@ -11,7 +11,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-@app.route("/nl2code")
+@app.post("/nl2code")
 def nl2code():
     data = json.dumps({"code": "print(\"hello world\")"})
     return data
