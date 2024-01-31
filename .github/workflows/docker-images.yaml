@@ -65,7 +65,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          file: fastapi/Dockerfile
+          file: ./Dockerfile
           context: "{{defaultContext}}:."
           platforms: linux/arm64
           push: true
